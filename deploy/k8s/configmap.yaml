@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: go-api-config
+  namespace: production
+  labels:
+    app: go-api
+data:
+  SERVER_PORT: "8080"
+  APP_ENV: "production"
+  DB_HOST: "postgres.production.svc.cluster.local"
+  DB_PORT: "5432"
+  DB_NAME: "appdb"
+  DB_SSLMODE: "require"
+  LOG_LEVEL: "info"
+  ALLOWED_ORIGINS: "https://example.com,https://app.example.com"
+  JWT_EXPIRY_HOURS: "24"
