@@ -76,7 +76,7 @@ func (r *postgresUserRepository) GetAll(ctx context.Context, limit, offset int) 
 	if err != nil {
 		return nil, fmt.Errorf("repository: get all users: %w", err)
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	var users []*model.User
 	for rows.Next() {

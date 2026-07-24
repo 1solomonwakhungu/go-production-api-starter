@@ -118,8 +118,6 @@ var (
 	ErrUserNotFound = errors.New("user not found")
 )
 
-var emailRegexStr = `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
-
 func isValidEmail(email string) bool {
 	// Simple email check without importing regexp here to avoid circular deps
 	// Uses basic validation
@@ -128,8 +126,5 @@ func isValidEmail(email string) bool {
 		return false
 	}
 	dot := strings.LastIndex(email[at:], ".")
-	if dot < 2 {
-		return false
-	}
-	return true
+	return dot >= 2
 }

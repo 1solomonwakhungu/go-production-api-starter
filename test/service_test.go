@@ -93,10 +93,10 @@ func TestUserService_Create(t *testing.T) {
 
 func TestUserService_GetByID(t *testing.T) {
 	tests := []struct {
-		name      string
-		id        string
-		setupMock func(repo *mock.MockUserRepository)
-		wantErr   bool
+		name         string
+		id           string
+		setupMock    func(repo *mock.MockUserRepository)
+		wantErr      bool
 		wantNotFound bool
 	}{
 		{
@@ -117,7 +117,7 @@ func TestUserService_GetByID(t *testing.T) {
 					return nil, repository.ErrNotFound
 				}
 			},
-			wantErr: true,
+			wantErr:      true,
 			wantNotFound: true,
 		},
 	}

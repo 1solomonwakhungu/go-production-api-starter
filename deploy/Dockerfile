@@ -5,7 +5,7 @@
 # =============================================================================
 
 # --- Build Stage ---
-FROM golang:1.23-alpine AS builder
+FROM golang:1.26.5-alpine AS builder
 
 # Install git (needed for some Go module downloads) and ca-certificates
 RUN apk add --no-cache git ca-certificates

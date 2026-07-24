@@ -5,7 +5,7 @@ bin/
 *.dll
 *.so
 *.dylib
-api
+/api
 
 # Test / coverage files
 coverage.out
