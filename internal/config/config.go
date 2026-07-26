@@ -8,18 +8,18 @@ import (
 
 // Config holds all application configuration values sourced from the environment.
 type Config struct {
-	ServerPort      string
-	Environment     string
-	DBHost          string
-	DBPort          string
-	DBUser          string
-	DBPassword      string
-	DBName          string
-	DBSSLMode       string
-	JWTSecret       string
-	JWTExpiryHours  int
-	LogLevel        string
-	AllowedOrigins  []string
+	ServerPort     string
+	Environment    string
+	DBHost         string
+	DBPort         string
+	DBUser         string
+	DBPassword     string
+	DBName         string
+	DBSSLMode      string
+	JWTSecret      string
+	JWTExpiryHours int
+	LogLevel       string
+	AllowedOrigins []string
 }
 
 // Load reads configuration from environment variables, applying sensible defaults.

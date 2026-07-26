@@ -13,24 +13,7 @@ import (
 	"github.com/1solomonwakhungu/go-production-api-starter/internal/repository"
 	"github.com/1solomonwakhungu/go-production-api-starter/internal/repository/mock"
 	"github.com/1solomonwakhungu/go-production-api-starter/internal/service"
-	"github.com/golang-jwt/jwt/v5"
 )
-
-// generateTestToken creates a valid JWT token for test authentication.
-func generateTestToken(t *testing.T, secret string) string {
-	t.Helper()
-	claims := jwt.MapClaims{
-		"sub":   "test-user-id",
-		"email": "test@example.com",
-		"exp":   9999999999,
-	}
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	str, err := token.SignedString([]byte(secret))
-	if err != nil {
-		t.Fatalf("failed to sign token: %v", err)
-	}
-	return str
-}
 
 // setupTestHandler creates a handler wired to a mock repository and returns both.
 func setupTestHandler() (*handler.Handler, *mock.MockUserRepository) {
@@ -38,34 +21,6 @@ func setupTestHandler() (*handler.Handler, *mock.MockUserRepository) {
 	userService := service.NewUserService(mockRepo)
 	h := handler.New(userService)
 	return h, mockRepo
-}
-
-// authMiddleware wraps the handler with JWT auth for testing protected routes.
-func authMiddleware(secret string, next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		authHeader := r.Header.Get("Authorization")
-		if authHeader == "" {
-			http.Error(w, `{"error":"authorization header required"}`, http.StatusUnauthorized)
-			return
-		}
-		parts := strings.SplitN(authHeader, " ", 2)
-		if len(parts) != 2 || !strings.EqualFold(parts[0], "Bearer") {
-			http.Error(w, `{"error":"invalid authorization header format"}`, http.StatusUnauthorized)
-			return
-		}
-		tokenString := strings.TrimSpace(parts[1])
-		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-				return nil, jwt.ErrSignatureInvalid
-			}
-			return []byte(secret), nil
-		})
-		if err != nil || !token.Valid {
-			http.Error(w, `{"error":"invalid or expired token"}`, http.StatusUnauthorized)
-			return
-		}
-		next.ServeHTTP(w, r)
-	})
 }
 
 func TestHealthEndpoint(t *testing.T) {

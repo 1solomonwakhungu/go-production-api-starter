@@ -5,7 +5,7 @@
 # =============================================================================
 
 # --- Build Stage ---
-FROM golang:1.23-alpine AS builder
+FROM golang:1.26.5-alpine AS builder
 
 # Install git (needed for some Go module downloads) and ca-certificates
 RUN apk add --no-cache git ca-certificates
@@ -26,7 +26,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
     ./cmd/api/
 
 # --- Runtime Stage ---
-FROM alpine:3.19
+FROM alpine:3.22
 
 # Install ca-certificates for HTTPS and tzdata for timezone support
 RUN apk --no-cache add ca-certificates tzdata

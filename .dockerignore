@@ -1,0 +1,11 @@
+.git
+.github
+.env*
+.idea
+.vscode
+*.out
+bin
+coverage.*
+deploy/terraform/.terraform
+deploy/terraform/*.tfstate*
+README.md

@@ -2,9 +2,9 @@
 
 A production-grade Go REST API showcasing clean architecture, JWT authentication, structured logging, graceful shutdown, and full DevOps tooling. Designed as a portfolio reference for senior-level Go engineering.
 
-![Go](https://img.shields.io/badge/Go-1.23+-00ADD8?logo=go)
+[![Go](https://img.shields.io/badge/Go-1.26.5-00ADD8?logo=go)](https://go.dev/)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+[![CI](https://github.com/1solomonwakhungu/go-production-api-starter/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/1solomonwakhungu/go-production-api-starter/actions/workflows/ci.yml)
 ![Docker](https://img.shields.io/badge/Docker-multi--stage-2496ED?logo=docker)
 
 ---
@@ -178,7 +178,7 @@ curl http://localhost:8080/users/550e8400-e29b-41d4-a716-446655440000 \
 ## Running Locally
 
 ### Prerequisites
-- Go 1.22+
+- Go 1.26.5
 - PostgreSQL 14+ (or use Docker)
 - `make` (optional but recommended)
 
@@ -288,7 +288,7 @@ GitHub Actions (`.github/workflows/ci.yml`) runs on every push/PR to `main`:
 
 | Component         | Choice                        | Why                                      |
 |-------------------|-------------------------------|------------------------------------------|
-| Language          | Go 1.22+                      | Performance, simplicity, strong stdlib   |
+| Language          | Go 1.26.5                     | Performance, simplicity, strong stdlib   |
 | HTTP Router       | `net/http` (Go 1.22 patterns) | No third-party dependency                |
 | Database          | PostgreSQL + `database/sql`   | Battle-tested, explicit SQL              |
 | Auth              | JWT (`golang-jwt/jwt/v5`)     | Stateless, industry standard             |
