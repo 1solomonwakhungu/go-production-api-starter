@@ -63,11 +63,16 @@ func main() {
 			os.Exit(1)
 		}
 	case <-ctx.Done():
-		shutdownCtx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-		defer cancel()
-		if err := apiServer.Shutdown(shutdownCtx); err != nil {
+		if err := gracefullyShutdown(apiServer.Shutdown, stop); err != nil {
 			logger.Error("shut down server", slog.Any("error", err))
 			os.Exit(1)
 		}
 	}
+}
+
+func gracefullyShutdown(shutdown func(context.Context) error, stop func()) error {
+	stop()
+	shutdownCtx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	return shutdown(shutdownCtx)
 }
