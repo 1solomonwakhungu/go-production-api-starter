@@ -26,7 +26,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
     ./cmd/api/
 
 # --- Runtime Stage ---
-FROM alpine:3.19
+FROM alpine:3.22
 
 # Install ca-certificates for HTTPS and tzdata for timezone support
 RUN apk --no-cache add ca-certificates tzdata
